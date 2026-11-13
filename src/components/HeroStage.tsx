@@ -24,8 +24,8 @@ class SceneBoundary extends Component<
 }
 
 /**
- * The 3D stage behind the hero copy. A still poster stands in until WebGL is ready,
- * and stays when motion is off or WebGL is unavailable.
+ * The 3D stage behind the hero copy. With motion off the same scene is drawn once and held still.
+ * A flat poster stands in until WebGL is ready, and stays if WebGL is unavailable.
  */
 export function HeroStage() {
   // The static HTML assumes no motion, so the canvas only mounts in the browser.
@@ -34,7 +34,7 @@ export function HeroStage() {
   const [failed, setFailed] = useState(false);
   const onReady = useCallback(() => setReady(true), []);
   const onError = useCallback(() => setFailed(true), []);
-  const show3d = motion && !failed;
+  const show3d = !failed;
 
   return (
     // One viewport tall even when the hero section grows past it, so the 3D scale stays predictable.
@@ -49,15 +49,15 @@ export function HeroStage() {
         <img
           src="/media/hero-poster.jpg"
           alt=""
-          width={540}
-          height={960}
+          width={720}
+          height={1280}
           fetchPriority="high"
           className="size-full object-cover"
         />
       </div>
       {show3d && (
         <SceneBoundary onError={onError}>
-          <HeroScene onReady={onReady} />
+          <HeroScene animate={motion} onReady={onReady} />
         </SceneBoundary>
       )}
     </div>

@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect, useMemo, useRef, useState, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Environment, Lightformer, useVideoTexture } from "@react-three/drei";
+import { Environment, Lightformer, useTexture, useVideoTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { roundedPlane, roundedRect, seeded } from "@/lib/three-shapes";
 import { HeroTimeline } from "./HeroTimeline";
@@ -27,17 +27,30 @@ function useSlabBase(portrait: boolean) {
   return { x: Math.min(width * 0.25, 3.2), y: 0.1, s: 0.84, ry: -0.42, rz: 0.055 };
 }
 
-/** The 9:16 glass slab that plays the reel. */
-function Slab({ shared, portrait, onReady }: { shared: SharedRef; portrait: boolean; onReady: () => void }) {
-  const group = useRef<THREE.Group>(null);
-  const time = useRef(0);
-  const base = useSlabBase(portrait);
+type SlabProps = { shared: SharedRef; portrait: boolean; onReady: () => void };
+
+/** The slab playing the reel. */
+function VideoSlab(props: SlabProps) {
   const texture = useVideoTexture("/media/hero-loop.mp4", {
     muted: true,
     loop: true,
     start: true,
     playsInline: true,
   });
+  return <Slab {...props} texture={texture} />;
+}
+
+/** The slab holding the reel's opening frame, for visitors with motion off. */
+function StillSlab(props: SlabProps) {
+  const texture = useTexture("/media/hero-poster.jpg");
+  return <Slab {...props} texture={texture} />;
+}
+
+/** The 9:16 glass slab. */
+function Slab({ shared, portrait, onReady, texture }: SlabProps & { texture: THREE.Texture }) {
+  const group = useRef<THREE.Group>(null);
+  const time = useRef(0);
+  const base = useSlabBase(portrait);
 
   const body = useMemo(() => {
     const g = new THREE.ExtrudeGeometry(roundedRect(2.36, 4.04, 0.3), {
@@ -53,9 +66,13 @@ function Slab({ shared, portrait, onReady }: { shared: SharedRef; portrait: bool
   }, []);
   const screen = useMemo(() => roundedPlane(2.2, 3.88, 0.24), []);
 
+  const invalidate = useThree((s) => s.invalidate);
+
+  // Mounting means the texture is in. Draw it even when there is no render loop.
   useEffect(() => {
     onReady();
-  }, [onReady]);
+    invalidate();
+  }, [onReady, invalidate, texture]);
 
   useFrame((_, dt) => {
     const g = group.current;
@@ -193,7 +210,17 @@ function Dust() {
   );
 }
 
-function Scene({ shared, onReady }: { shared: SharedRef; onReady: () => void }) {
+/** Without a render loop, ask for a few extra frames while textures and the environment settle. */
+function Settle() {
+  const invalidate = useThree((s) => s.invalidate);
+  useEffect(() => {
+    const ids = [60, 300, 900, 2000].map((ms) => window.setTimeout(() => invalidate(), ms));
+    return () => ids.forEach((id) => window.clearTimeout(id));
+  }, [invalidate]);
+  return null;
+}
+
+function Scene({ shared, animate, onReady }: { shared: SharedRef; animate: boolean; onReady: () => void }) {
   const portrait = useThree((s) => s.viewport.aspect < 1);
   const base = useSlabBase(portrait);
   return (
@@ -210,19 +237,32 @@ function Scene({ shared, onReady }: { shared: SharedRef; onReady: () => void }) 
       <Beam portrait={portrait} />
       <Dust />
       <HeroTimeline shared={shared} portrait={portrait} slabY={base.y} />
+      {!animate && <Settle />}
       <Suspense fallback={null}>
-        <Slab shared={shared} portrait={portrait} onReady={onReady} />
+        {animate ? (
+          <VideoSlab shared={shared} portrait={portrait} onReady={onReady} />
+        ) : (
+          <StillSlab shared={shared} portrait={portrait} onReady={onReady} />
+        )}
       </Suspense>
     </>
   );
 }
 
-export default function HeroScene({ onReady }: { onReady: () => void }) {
+/**
+ * The hero's 3D stage. With `animate` off it draws the same scene once and holds it:
+ * no render loop, no pointer or scroll response, a still frame on the slab.
+ */
+export default function HeroScene({ animate, onReady }: { animate: boolean; onReady: () => void }) {
   const wrap = useRef<HTMLDivElement>(null);
   const shared = useRef<Shared>({ px: 0, py: 0, scroll: 0 });
   const [active, setActive] = useState(true);
 
   useEffect(() => {
+    if (!animate) {
+      shared.current = { px: 0, py: 0, scroll: 0 };
+      return;
+    }
     const onMove = (e: PointerEvent) => {
       shared.current.px = (e.clientX / window.innerWidth) * 2 - 1;
       shared.current.py = -((e.clientY / window.innerHeight) * 2 - 1);
@@ -241,7 +281,7 @@ export default function HeroScene({ onReady }: { onReady: () => void }) {
       window.removeEventListener("scroll", onScroll);
       io.disconnect();
     };
-  }, []);
+  }, [animate]);
 
   return (
     <div ref={wrap} className="absolute inset-0">
@@ -249,9 +289,9 @@ export default function HeroScene({ onReady }: { onReady: () => void }) {
         dpr={[1, 1.75]}
         camera={{ fov: 35, position: [0, 0, 8], near: 0.1, far: 40 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-        frameloop={active ? "always" : "never"}
+        frameloop={animate ? (active ? "always" : "never") : "demand"}
       >
-        <Scene shared={shared} onReady={onReady} />
+        <Scene shared={shared} animate={animate} onReady={onReady} />
       </Canvas>
     </div>
   );

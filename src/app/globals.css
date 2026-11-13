@@ -285,3 +285,18 @@ html[data-motion="off"] .drift {
     box-shadow: 0 30px 80px -30px rgb(43 80 255 / 0.8);
   }
 }
+
+/* The switch that turns animations on breathes softly so it gets noticed */
+.cta-pulse {
+  animation: cta-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes cta-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(125 150 255 / 0.65);
+  }
+  55% {
+    box-shadow: 0 0 0 12px rgb(125 150 255 / 0);
+  }
+}

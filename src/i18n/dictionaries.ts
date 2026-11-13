@@ -14,11 +14,11 @@ const en = {
     switchHref: "/es/",
   },
   motionPref: {
-    off: "Animations off (system setting)",
+    off: "Animations are off on this device",
     on: "Animations on",
     offShort: "Motion off",
     onShort: "Motion on",
-    turnOn: "Turn on",
+    turnOn: "Turn on animations",
     turnOff: "Turn off",
   },
   dock: {
@@ -187,11 +187,11 @@ const es: Dict = {
     switchHref: "/",
   },
   motionPref: {
-    off: "Animaciones desactivadas (ajuste del sistema)",
+    off: "Las animaciones están apagadas en este equipo",
     on: "Animaciones activadas",
     offShort: "Animación off",
     onShort: "Animación on",
-    turnOn: "Activar",
+    turnOn: "Activar animaciones",
     turnOff: "Desactivar",
   },
   dock: {
