@@ -1,0 +1,114 @@
+{
+  "snapshotDate": "2026-11-12",
+  "sources": {
+    "public": "Public TikTok profile and video pages, read on the snapshot date. TikTok rounds large per-video figures.",
+    "studio": "TikTok Studio analytics screenshots taken by Oscar on the dates noted in each growth record."
+  },
+  "accounts": [
+    {
+      "id": "astrea",
+      "handle": "@astrea.latam",
+      "url": "https://www.tiktok.com/@astrea.latam",
+      "role": { "en": "Content Director, 2025", "es": "Director de contenido, 2025" },
+      "note": {
+        "en": "Script, camera, editing and strategy for a TikTok LIVE creator agency.",
+        "es": "Guion, cámara, edición y estrategia para una agencia de creadores de TikTok LIVE."
+      },
+      "created": "2024-09-06",
+      "followers": 174214,
+      "likes": 1234902,
+      "videos": 234
+    },
+    {
+      "id": "askitar",
+      "handle": "@askitar",
+      "url": "https://www.tiktok.com/@askitar",
+      "role": { "en": "Personal creator account", "es": "Cuenta personal de creador" },
+      "note": {
+        "en": "Comedy, plans with friends, culture and tech. Built from zero.",
+        "es": "Humor, planes con amigos, cultura y tecnología. Construida desde cero."
+      },
+      "created": "2016-02-05",
+      "followers": 148848,
+      "likes": 6380885,
+      "videos": 171
+    }
+  ],
+  "videos": [
+    { "id": "7462027392165416198", "account": "astrea", "date": "2025-01-21", "views": 16100000, "likes": 509500, "comments": 121800, "shares": 48200, "saves": 101341, "duration": 94, "format": "explainer", "title": { "en": "How much TikTok gifts really cost", "es": "Cuánto cuestan los regalos de TikTok" } },
+    { "id": "7469883310135725317", "account": "astrea", "date": "2025-02-14", "views": 4500000, "likes": 172400, "comments": 3388, "shares": 14800, "saves": 17343, "duration": 62, "format": "explainer", "title": { "en": "A record-breaking moment on TikTok LIVE", "es": "Un momento histórico en TikTok LIVE" } },
+    { "id": "7464318811919879429", "account": "astrea", "date": "2025-02-01", "views": 3300000, "likes": 67800, "comments": 1194, "shares": 4526, "saves": 8495, "duration": 70, "format": "explainer", "title": { "en": "The real value of TikTok gifts", "es": "El valor real de los regalos de TikTok" } },
+    { "id": "7571567834044648760", "account": "astrea", "date": "2025-11-12", "views": 3300000, "likes": 37000, "comments": 954, "shares": 3008, "saves": 4295, "duration": 58, "format": "explainer", "title": { "en": "How much do TikTok gifts cost? The remake", "es": "¿Cuánto cuestan los regalos de TikTok? La nueva versión" } },
+    { "id": "7494451162616188166", "account": "astrea", "date": "2025-04-24", "views": 2100000, "likes": 81600, "comments": 4256, "shares": 10300, "saves": 15499, "duration": 89, "format": "explainer", "title": { "en": "Gifter levels, explained", "es": "Los niveles de los donadores, explicados" } },
+    { "id": "7494451162679102725", "account": "astrea", "date": "2025-04-22", "views": 1900000, "likes": 28500, "comments": 502, "shares": 846, "saves": 2928, "duration": 44, "format": "explainer", "title": { "en": "Do you qualify? The agency checklist", "es": "¿Calificas? La checklist para entrar a la agencia" } },
+    { "id": "7494451161324326150", "account": "astrea", "date": "2025-04-18", "views": 1600000, "likes": 16400, "comments": 502, "shares": 967, "saves": 1950, "duration": 35, "format": "explainer", "title": { "en": "Does an agency take your money? Myth vs. fact", "es": "¿Una agencia te quita tu plata? Mito y realidad" } },
+    { "id": "7514899327391698232", "account": "astrea", "date": "2025-06-13", "views": 952200, "likes": 27300, "comments": 581, "shares": 6162, "saves": 19981, "duration": 115, "format": "tutorial", "title": { "en": "Stickers that trigger more gifts", "es": "Stickers que activan más regalos" } },
+    { "id": "7525500052501007622", "account": "astrea", "date": "2025-07-10", "views": 868100, "likes": 31200, "comments": 2055, "shares": 23200, "saves": 5383, "duration": 37, "format": "ai", "title": { "en": "The lion of my battle", "es": "El león de mi batalla" } },
+    { "id": "7488412328149404933", "account": "astrea", "date": "2025-04-06", "views": 864800, "likes": 50300, "comments": 2219, "shares": 7268, "saves": 9032, "duration": 80, "format": "experiment", "title": { "en": "We went LIVE seven days straight", "es": "Hicimos LIVE siete días seguidos" } },
+    { "id": "7588952178388225291", "account": "astrea", "date": "2025-12-31", "views": 706800, "likes": 11700, "comments": 1266, "shares": 1674, "saves": 2046, "duration": 50, "format": "explainer", "title": { "en": "The biggest gifts on TikTok", "es": "Los regalos más grandes de TikTok" } },
+    { "id": "7574310796067376440", "account": "astrea", "date": "2025-11-19", "views": 681000, "likes": 17700, "comments": 898, "shares": 3335, "saves": 4280, "duration": 81, "format": "explainer", "title": { "en": "What you could earn if you start today", "es": "Lo que podrías generar si empiezas hoy" } },
+    { "id": "7182607959174810886", "account": "askitar", "date": "2022-12-29", "views": 5800000, "likes": 428100, "comments": 239, "shares": 4223, "saves": 20109, "duration": 18, "format": "comedy", "title": { "en": "The zoom test", "es": "La prueba de zoom" } },
+    { "id": "7152900281217420549", "account": "askitar", "date": "2022-10-10", "views": 5600000, "likes": 976900, "comments": 4148, "shares": 45900, "saves": 68887, "duration": 51, "format": "comedy", "title": { "en": "Friends sketch: “Duren”", "es": "Sketch de amigos: «Duren»" } },
+    { "id": "7100641142408056069", "account": "askitar", "date": "2022-05-22", "views": 3400000, "likes": 519100, "comments": 1463, "shares": 7088, "saves": 26130, "duration": 97, "format": "experiment", "title": { "en": "Party experiment: the results", "es": "Experimento de fiesta: los resultados" } },
+    { "id": "7280665019900071174", "account": "askitar", "date": "2023-09-19", "views": 2900000, "likes": 469700, "comments": 2742, "shares": 53200, "saves": 91978, "duration": 65, "format": "plans", "title": { "en": "Randonautica, the plan everyone is trying", "es": "Randonautica, el plan que está tomando fuerza" } },
+    { "id": "7145105844688981253", "account": "askitar", "date": "2022-09-19", "views": 2700000, "likes": 426800, "comments": 2565, "shares": 15100, "saves": 16162, "duration": 16, "format": "comedy", "title": { "en": "I didn’t think this would happen", "es": "No pensé que esto llegara a suceder" } },
+    { "id": "7250500873745337605", "account": "askitar", "date": "2023-06-30", "views": 2200000, "likes": 405300, "comments": 1406, "shares": 30400, "saves": 73499, "duration": 41, "format": "plans", "title": { "en": "A plan where curiosity wins", "es": "Un plan donde ustedes son el gato" } },
+    { "id": "6971447083060464902", "account": "askitar", "date": "2021-06-08", "views": 2100000, "likes": 251100, "comments": 2213, "shares": 4195, "saves": 4924, "duration": 15, "format": "comedy", "title": { "en": "Based on true events", "es": "Basado en hechos reales" } },
+    { "id": "7193366041278352645", "account": "askitar", "date": "2023-01-27", "views": 1700000, "likes": 266800, "comments": 2462, "shares": 35100, "saves": 38352, "duration": 68, "format": "plans", "title": { "en": "Weird plans with friends", "es": "Planes extraños con amigos" } },
+    { "id": "7100215479729540357", "account": "askitar", "date": "2022-05-21", "views": 1500000, "likes": 152300, "comments": 398, "shares": 2764, "saves": 3156, "duration": 30, "format": "comedy", "title": { "en": "Cover night with friends", "es": "Noche de covers con amigos" } },
+    { "id": "7195223046117018886", "account": "askitar", "date": "2023-02-01", "views": 1300000, "likes": 182600, "comments": 1387, "shares": 18700, "saves": 23751, "duration": 77, "format": "plans", "title": { "en": "Unusual plans with friends", "es": "Planes poco usuales con amigos" } }
+  ],
+  "growth": [
+    {
+      "id": "askitar-2023",
+      "account": "askitar",
+      "confirmed": true,
+      "days": 60,
+      "capturedOn": "2023-08-03",
+      "label": { "en": "Summer 2023", "es": "Mediados de 2023" },
+      "metrics": {
+        "views": { "value": 4338829, "changePct": 423.44 },
+        "likes": { "value": 813969, "changePct": 709.56 },
+        "shares": { "value": 61494, "changePct": 801.14 },
+        "comments": { "value": 6942, "changePct": 510.55 },
+        "profileViews": { "value": 47183, "changePct": 216.43 }
+      }
+    },
+    {
+      "id": "askitar-2024",
+      "account": "askitar",
+      "confirmed": true,
+      "days": 60,
+      "from": "2024-07-20",
+      "to": "2024-09-17",
+      "capturedOn": "2024-09-19",
+      "label": { "en": "Jul to Sep 2024", "es": "Jul a sep de 2024" },
+      "metrics": {
+        "views": { "value": 945651, "changePct": 285.17 },
+        "reach": { "value": 923654, "changePct": 299.23 },
+        "likes": { "value": 64596, "changePct": 297.83 },
+        "shares": { "value": 2251, "changePct": 263.06 },
+        "comments": { "value": 765, "changePct": 320.33 },
+        "profileViews": { "value": 4804, "changePct": 226.36 }
+      }
+    },
+    {
+      "id": "dec-2024",
+      "account": "astrea",
+      "confirmed": false,
+      "days": 28,
+      "from": "2024-12-04",
+      "to": "2024-12-31",
+      "capturedOn": "2025-01-02",
+      "label": { "en": "December 2024", "es": "Diciembre de 2024" },
+      "metrics": {
+        "views": { "value": 191369, "changePct": 729.69 },
+        "reach": { "value": 183930, "changePct": 752.63 },
+        "likes": { "value": 13529, "changePct": 530.14 },
+        "shares": { "value": 986, "changePct": null },
+        "comments": { "value": 3966, "changePct": 901.52 },
+        "profileViews": { "value": 6838, "changePct": null }
+      }
+    }
+  ]
+}
