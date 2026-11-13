@@ -1,0 +1,13 @@
+# The site is a static export: Next.js writes plain files to /out and Netlify serves them.
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Videos and images never change name without changing content, so browsers can keep them.
+[[headers]]
+  for = "/media/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
