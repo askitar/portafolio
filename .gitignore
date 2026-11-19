@@ -45,3 +45,9 @@ next-env.d.ts
 
 # ajustes locales de Claude (rutas de este PC)
 /.claude/
+!.env.example
+*.key
+Thumbs.db
+.cache/
+out/
+exports/
