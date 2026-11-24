@@ -4,6 +4,7 @@ import { Contact } from "./Contact";
 import { Header } from "./Header";
 import { Hero } from "./Hero";
 import { Impact } from "./Impact";
+import { MotionReel } from "./MotionReel";
 import { MotionToggle } from "./MotionToggle";
 import { Showcase } from "./Showcase";
 import { Stage } from "./Stage";
@@ -19,11 +20,12 @@ export function Site({ lang }: { lang: Lang }) {
       <MotionToggle t={t.motionPref} />
       <main className="relative pb-[var(--dock-h)]">
         <Hero t={t.hero} lang={lang} />
-        <Impact t={t.impact} lang={lang} labels={t.clip} />
-        <Showcase id="filmmaking" index="02" t={t.filmmaking} lang={lang} labels={t.clip} />
-        <Showcase id="motion" index="03" t={t.motion} lang={lang} labels={t.clip} />
-        <Showcase id="dummies" index="04" t={t.dummies} lang={lang} labels={t.clip} />
-        <Showcase id="lora" index="05" t={t.lora} lang={lang} labels={t.clip} />
+        <MotionReel index="01" t={t.mograph} reel={t.reel} lang={lang} />
+        <Impact t={t.impact} lang={lang} reel={t.reel} />
+        <Showcase id="filmmaking" index="03" t={t.filmmaking} lang={lang} reel={t.reel} />
+        <Showcase id="motion" index="04" t={t.motion} lang={lang} reel={t.reel} />
+        <Showcase id="dummies" index="05" t={t.dummies} lang={lang} reel={t.reel} />
+        <Showcase id="lora" index="06" t={t.lora} lang={lang} reel={t.reel} />
         <Contact t={t.contact} lang={lang} />
       </main>
       <TimelineDock t={t.dock} />

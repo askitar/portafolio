@@ -4,9 +4,10 @@ import { motion } from "motion/react";
 import type { ReactNode } from "react";
 import { useMotion } from "@/lib/motion";
 
-const SHOWN = { opacity: 1, y: 0 };
+const HIDDEN = { opacity: 0, y: 70, rotateX: 16, scale: 0.94, transformPerspective: 1200 };
+const SHOWN = { opacity: 1, y: 0, rotateX: 0, scale: 1, transformPerspective: 1200 };
 
-/** Fades content up the first time it enters the viewport. Shows it at once when motion is off. */
+/** Content tilts up out of depth the first time it enters the viewport. Shows it at once when motion is off. */
 export function Reveal({
   children,
   delay = 0,
@@ -20,7 +21,7 @@ export function Reveal({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 28 }}
+      initial={HIDDEN}
       {...(allowed
         ? { whileInView: SHOWN, viewport: { once: true, margin: "0px 0px -10% 0px" } }
         : { animate: SHOWN })}

@@ -7,22 +7,15 @@ import { useMotion } from "@/lib/motion";
 import { profile } from "@/lib/profile";
 import { totals, type Lang } from "@/lib/stats";
 import { Counter } from "./Counter";
+import { HeroIntro } from "./HeroIntro";
 import { HeroStage } from "./HeroStage";
 import { useStage } from "./Stage";
 
 const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
 
-// Desktop: the three headline numbers float around the slab (which sits at 75% of the width).
-const CHIP_SPOTS = [
-  { position: "left-[52%] top-[19%]", drift: "0s" },
-  { position: "right-[3%] top-[45%]", drift: "-2.4s" },
-  { position: "left-[55%] top-[69%]", drift: "-4.6s" },
-];
-
 export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
   const root = useRef<HTMLElement>(null);
   const content = useRef<HTMLDivElement>(null);
-  const chips = useRef<HTMLDivElement>(null);
   const { playing, togglePlay } = useStage();
   const motion = useMotion(false);
 
@@ -30,7 +23,7 @@ export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
   useEffect(() => {
     if (!motion) return;
     const ctx = gsap.context(() => {
-      gsap.to([content.current, chips.current], {
+      gsap.to(content.current, {
         yPercent: -8,
         opacity: 0,
         ease: "none",
@@ -58,9 +51,9 @@ export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
 
       <div
         ref={content}
-        className="relative z-10 mx-auto flex w-full max-w-[1500px] flex-1 flex-col justify-end px-5 pb-[calc(var(--dock-h)+1.25rem)] pt-[calc(30svh+6.25rem)] md:justify-center md:px-10 md:pb-[calc(var(--dock-h)+1.5rem)] md:pt-24"
+        className="relative z-10 mx-auto grid w-full max-w-[1500px] flex-1 content-start gap-x-10 gap-y-7 px-5 pb-[calc(var(--dock-h)+1.25rem)] pt-[8.25rem] md:grid-cols-2 md:content-center md:items-center md:px-10 md:pb-[calc(var(--dock-h)+1.5rem)] md:pt-24"
       >
-        <div className="md:max-w-[60%]">
+        <div className="min-w-0">
           <p
             className="fade-up flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.22em] text-dim"
             style={delay(80)}
@@ -72,7 +65,7 @@ export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
             {t.eyebrow}
           </p>
 
-          <h1 className="mt-4 whitespace-nowrap font-display text-[clamp(3.2rem,17.2vw,6rem)] font-extrabold uppercase leading-[0.84] md:mt-5 md:text-[clamp(4.5rem,min(11.2vw,15svh),11.5rem)]">
+          <h1 className="mt-4 whitespace-nowrap font-display text-[clamp(3.2rem,17.2vw,6rem)] font-extrabold uppercase leading-[0.84] md:mt-5 md:text-[clamp(4rem,min(9vw,15svh),8.8rem)]">
             {t.title.map((line, i) => (
               <span key={line} className="line">
                 <span
@@ -134,6 +127,25 @@ export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
           </div>
         </div>
 
+        {/* The presentation comes first on phones and sits on the right on desktop */}
+        <div className="fade-up order-first min-w-0 md:order-none md:pt-12" style={delay(350)}>
+          <HeroIntro t={t.intro} />
+          <dl className="mt-5 hidden grid-cols-3 gap-3 md:grid">
+            {stats.map((s, i) => (
+              <div
+                key={s.label}
+                className="drift glass-strong flex flex-col-reverse justify-end gap-1 rounded-2xl px-4 py-3"
+                style={{ "--drift": `${i * -2.3}s` } as CSSProperties}
+              >
+                <dt className="font-mono text-[9.5px] uppercase leading-snug tracking-[0.12em] text-dim">{s.label}</dt>
+                <dd className="font-display text-[clamp(2.1rem,5.2svh,3.2rem)] font-bold leading-none">
+                  <Counter value={s.value} lang={lang} delay={1100 + i * 140} />
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
         {/* Phone: the numbers sit in a row under the buttons */}
         <dl
           className="fade-up mt-9 grid grid-cols-3 gap-x-4 border-t border-line pt-5 md:hidden"
@@ -150,25 +162,6 @@ export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
             </div>
           ))}
         </dl>
-      </div>
-
-      {/* Desktop: the numbers float as glass chips around the slab */}
-      <div ref={chips} className="pointer-events-none absolute inset-0 z-10 hidden md:block">
-        {stats.map((s, i) => (
-          <div key={s.label} className={`absolute ${CHIP_SPOTS[i].position}`}>
-            <div className="fade-up" style={delay(1050 + i * 140)}>
-              <div
-                className="drift glass-strong rounded-2xl px-5 py-3.5"
-                style={{ "--drift": CHIP_SPOTS[i].drift } as CSSProperties}
-              >
-                <p className="font-display text-[clamp(2.6rem,6.2svh,3.6rem)] font-bold leading-none">
-                  <Counter value={s.value} lang={lang} delay={1100 + i * 140} />
-                </p>
-                <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-dim">{s.label}</p>
-              </div>
-            </div>
-          </div>
-        ))}
       </div>
     </section>
   );

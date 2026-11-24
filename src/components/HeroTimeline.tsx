@@ -3,7 +3,8 @@
 import { useMemo, useRef, type RefObject } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { roundedPlane, seeded } from "@/lib/three-shapes";
+import { seeded } from "@/lib/seeded";
+import { roundedPlane } from "@/lib/three-shapes";
 
 type TrackKind = "video" | "audio";
 type TrackSpec = {
@@ -145,7 +146,7 @@ const wrap = (v: number, m: number) => ((v % m) + m) % m;
 const damp = THREE.MathUtils.damp;
 
 /**
- * A full sequence, V tracks above and A tracks below, playing slowly behind the slab.
+ * A full sequence, V tracks above and A tracks below, playing slowly behind the player.
  * It fades out toward the left so the headline keeps a clean background.
  */
 export function HeroTimeline({
@@ -166,7 +167,7 @@ export function HeroTimeline({
   const clips = useMemo(() => buildSequence(), []);
   const geos = useMemo(() => clips.map((c) => clipGeometry(c.w, TRACKS[c.track].kind)), [clips]);
 
-  // Desktop: starts just right of the headline. Phone: a band behind the slab, edge to edge.
+  // Desktop: starts just right of the headline. Phone: a band behind the player, edge to edge.
   const scale = portrait ? 0.32 : 1;
   const originX = portrait ? -width / 2 - 0.5 : -0.35;
   const originY = portrait ? slabY : 0;

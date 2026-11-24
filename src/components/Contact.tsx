@@ -25,7 +25,7 @@ function TikTokIcon({ size = 26 }: { size?: number }) {
 
 export function Contact({ t, lang }: { t: Dict["contact"]; lang: Lang }) {
   return (
-    <SectionShell id="contact" index="06" label={t.label}>
+    <SectionShell id="contact" index="07" label={t.label}>
       <Reveal>
         <h2 className="max-w-[13ch] font-display text-[clamp(3.6rem,11vw,10rem)] font-extrabold uppercase leading-[0.85]">
           {t.title}

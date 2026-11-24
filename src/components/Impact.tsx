@@ -1,5 +1,7 @@
+import type { CSSProperties } from "react";
 import type { Dict } from "@/i18n/dictionaries";
-import { showcase } from "@/lib/showcase";
+import { reelItems } from "@/lib/reel";
+import { sectionColor } from "@/lib/sections";
 import {
   accountColor,
   accounts,
@@ -11,10 +13,10 @@ import {
   type GrowthRecord,
   type Lang,
 } from "@/lib/stats";
-import type { ClipLabels } from "./ClipCard";
 import { Counter } from "./Counter";
-import { Filmstrip } from "./Filmstrip";
 import { ArrowUpRight } from "./icons";
+import { EditTracks } from "./EditTracks";
+import { Reel } from "./Reel";
 import { Reveal } from "./Reveal";
 import { SectionShell } from "./SectionShell";
 import { StatsDatabase } from "./StatsDatabase";
@@ -60,7 +62,7 @@ function GrowthCard({ g, t, lang }: { g: GrowthRecord; t: Dict["impact"]; lang: 
   );
 }
 
-export function Impact({ t, lang, labels }: { t: Dict["impact"]; lang: Lang; labels: ClipLabels }) {
+export function Impact({ t, lang, reel }: { t: Dict["impact"]; lang: Lang; reel: Dict["reel"] }) {
   const date = longDate(snapshotDate, lang);
   const counters = [
     { value: totals.followers, label: t.counters.followers, mode: "compact" as const },
@@ -70,34 +72,32 @@ export function Impact({ t, lang, labels }: { t: Dict["impact"]; lang: Lang; lab
   ];
 
   return (
-    <SectionShell id="impact" index="01" label={t.label}>
-      <div className="grid gap-8 md:grid-cols-[1.25fr_1fr] md:items-end md:gap-16">
-        <Reveal>
-          <h2 className="font-display text-[clamp(3.4rem,10vw,8.5rem)] font-extrabold uppercase leading-[0.86]">
-            {t.title}
-          </h2>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <p className="max-w-xl text-[1.05rem] leading-relaxed text-dim md:text-lg">
-            {t.intro.replace("{date}", date)}
-          </p>
-        </Reveal>
-      </div>
+    <SectionShell id="impact" index="02" label={t.label}>
+      <Reel
+        items={reelItems("impact")}
+        lang={lang}
+        t={reel}
+        label={t.viral.title}
+        flip
+        intro={
+          <>
+            <h2 className="section-title">{t.title}</h2>
+            <p className="mt-5 max-w-md text-[1.05rem] leading-relaxed text-dim">{t.intro.replace("{date}", date)}</p>
+            <h3 className="mt-7 text-[1.02rem] font-semibold">{t.viral.title}</h3>
+          </>
+        }
+      />
 
-      <Reveal className="mt-12 md:mt-16">
-        <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1">
-          <h3 className="font-display text-[2.2rem] font-bold uppercase leading-none md:text-[3rem]">
-            {t.viral.title}
-          </h3>
-          <p className="text-[0.95rem] text-dim">{t.viral.intro}</p>
-        </div>
-        <Filmstrip clips={showcase.impact ?? []} lang={lang} labels={labels} maxHeight="34rem" />
-      </Reveal>
+      {/* The edit comes back behind the second half of this long section */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-[1] h-[110rem] overflow-clip">
+        <div className="reel-glow absolute inset-0" style={{ "--glow": sectionColor("impact") } as CSSProperties} />
+        <EditTracks color={sectionColor("impact")} seed={21} />
+      </div>
 
       <Reveal className="mt-12 md:mt-20">
         <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-4">
           {counters.map((c) => (
-            <div key={c.label} className="flex flex-col-reverse justify-end gap-3 bg-panel p-5 md:p-8">
+            <div key={c.label} className="impact-cell flex flex-col-reverse justify-end gap-3 p-5 md:p-8">
               <dt className="text-[13px] leading-snug text-dim md:text-sm">{c.label}</dt>
               <dd className="font-display text-[clamp(3.4rem,9vw,7.2rem)] font-bold leading-[0.85]">
                 <Counter value={c.value} lang={lang} mode={c.mode} />

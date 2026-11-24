@@ -1,9 +1,9 @@
 import { LOGOS, type LogoId } from "@/lib/logos";
 import { sectionColor, type SectionId } from "@/lib/sections";
-import { showcase } from "@/lib/showcase";
+import { reelItems } from "@/lib/reel";
 import type { Lang } from "@/lib/stats";
-import type { ClipLabels } from "./ClipCard";
-import { Filmstrip } from "./Filmstrip";
+import type { Dict } from "@/i18n/dictionaries";
+import { Reel } from "./Reel";
 import { Reveal } from "./Reveal";
 import { SectionShell } from "./SectionShell";
 
@@ -60,29 +60,21 @@ export function Showcase({
   index,
   t,
   lang,
-  labels,
+  reel,
 }: {
   id: SectionId;
   index: string;
   t: Copy;
   lang: Lang;
-  labels: ClipLabels;
+  reel: Dict["reel"];
 }) {
   const color = sectionColor(id);
-  const clips = showcase[id] ?? [];
+  const clips = reelItems(id);
   const marked = t.tools.filter((tool) => APP_TILES[tool] || TOOL_LOGOS[tool]);
   const plain = t.tools.filter((tool) => !marked.includes(tool));
 
-  return (
-    <SectionShell id={id} index={index} label={t.label}>
-      <div className="grid gap-8 md:grid-cols-[1.15fr_1fr] md:items-end md:gap-16">
-        <Reveal>
-          <h2 className="font-display text-[clamp(3.4rem,10vw,8.5rem)] font-extrabold uppercase leading-[0.86]">
-            {t.title}
-          </h2>
-        </Reveal>
-        <Reveal delay={0.08}>
-          <p className="max-w-xl text-[1.05rem] leading-relaxed text-dim md:text-lg">{t.body}</p>
+  const tools = (
+    <>
           {marked.length > 0 && (
             <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
               {marked.map((tool) => (
@@ -109,13 +101,38 @@ export function Showcase({
               ))}
             </ul>
           )}
-        </Reveal>
-      </div>
+    </>
+  );
 
-      {clips.length > 0 && (
-        <Reveal delay={0.12} className="mt-10 md:mt-16">
-          <Filmstrip clips={clips} lang={lang} labels={labels} />
-        </Reveal>
+  return (
+    <SectionShell id={id} index={index} label={t.label}>
+      {clips.length > 0 ? (
+        <Reel
+          items={clips}
+          lang={lang}
+          t={reel}
+          label={t.label}
+          flip={Number(index) % 2 === 0}
+          intro={
+            <>
+              <h2 className="section-title">{t.title}</h2>
+              <p className="mt-5 max-w-md text-[1.05rem] leading-relaxed text-dim">{t.body}</p>
+            </>
+          }
+          footer={<div className="mx-auto flex flex-col items-center">{tools}</div>}
+        />
+      ) : (
+        <div className="grid gap-8 md:grid-cols-[1.15fr_1fr] md:items-end md:gap-16">
+          <Reveal>
+            <h2 className="font-display text-[clamp(3.4rem,10vw,8.5rem)] font-extrabold uppercase leading-[0.86]">
+              {t.title}
+            </h2>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p className="max-w-xl text-[1.05rem] leading-relaxed text-dim md:text-lg">{t.body}</p>
+            {tools}
+          </Reveal>
+        </div>
       )}
 
       {t.cards && (
@@ -127,7 +144,7 @@ export function Showcase({
                   className="relative h-full overflow-hidden rounded-3xl border p-6 md:p-8"
                   style={{
                     borderColor: `color-mix(in oklab, ${color} 35%, transparent)`,
-                    background: `linear-gradient(160deg, color-mix(in oklab, ${color} 16%, transparent), rgb(255 255 255 / 0.02) 60%)`,
+                    background: `linear-gradient(160deg, color-mix(in oklab, ${color} 16%, transparent), rgb(8 10 20 / 0.75) 60%)`,
                   }}
                 >
                   <p className="font-mono text-[11px] tracking-[0.18em]" style={{ color }}>
