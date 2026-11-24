@@ -2,7 +2,7 @@ import type { Lang } from "@/lib/stats";
 
 const en = {
   meta: {
-    title: "Oscar Bohórquez (ASKITAR) · Content Director & AI Video Creator",
+    title: "Oscar Bohórquez (ASKITAR) · Social Media Marketing Specialist, Video Editor & AI Content Creator",
     description:
       "Short-form video that reaches millions: 323K followers, 7.6M likes and 66M+ views on the top videos. Filmmaking, editing, motion design, 3D and AI production.",
   },
@@ -39,7 +39,7 @@ const en = {
   hero: {
     eyebrow: "ASKITAR · Portfolio",
     title: ["Content", "that reaches", "millions."],
-    role: "Content Director & AI Video Creator",
+    role: "Social Media Marketing Specialist, Video Editor & AI Content Creator",
     body: "I script, shoot, edit, animate and generate short-form video, end to end.",
     stats: {
       followers: "followers",
@@ -191,7 +191,7 @@ export type Dict = typeof en;
 
 const es: Dict = {
   meta: {
-    title: "Oscar Bohórquez (ASKITAR) · Director de contenido y creador de video con IA",
+    title: "Oscar Bohórquez (ASKITAR) · Especialista en social media marketing, editor de video y creador de contenido con IA",
     description:
       "Video corto que llega a millones: 323K seguidores, 7,6 M de me gusta y más de 66 M de vistas en los videos top. Filmmaking, edición, motion design, 3D y producción con IA.",
   },
@@ -228,7 +228,7 @@ const es: Dict = {
   hero: {
     eyebrow: "ASKITAR · Portafolio",
     title: ["Contenido", "que llega a", "millones."],
-    role: "Director de contenido y creador de video con IA",
+    role: "Especialista en social media marketing, editor de video y creador de contenido con IA",
     body: "Escribo, grabo, edito, animo y genero video corto de principio a fin.",
     stats: {
       followers: "seguidores",

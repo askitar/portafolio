@@ -84,7 +84,7 @@ export function Hero({ t, lang }: { t: Dict["hero"]; lang: Lang }) {
           >
             {profile.name}
           </p>
-          <p className="fade-up mt-2 text-[1.05rem] font-medium text-rey-hi md:text-xl" style={delay(620)}>
+          <p className="fade-up mt-2 max-w-xl text-balance text-[1.05rem] font-medium text-rey-hi md:text-xl" style={delay(620)}>
             {t.role}
           </p>
           <p
