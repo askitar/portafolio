@@ -4,7 +4,7 @@ Personal portfolio of **Oscar Bohórquez (Askitar)**: social media manager, vide
 
 **Live site:** https://askitar.netlify.app
 
-![Portfolio hero](public/media/hero-poster.jpg)
+![Portfolio hero](public/media/presentation.jpg)
 
 ## What it is
 
